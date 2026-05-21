@@ -4,6 +4,12 @@ import sklearn as sk
 import streamlit as st
 from io import StringIO
 import pickle as pk
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+def image_path(name: str) -> str:
+    return str(SCRIPT_DIR / "pictures" / name)
 
 from tsfresh import extract_features
 from sklearn.neighbors import KNeighborsClassifier
@@ -25,18 +31,18 @@ st.write("Die App ist in Python geschrieben und nutzt die Bibliotheken Streamlit
 st.write("Diese verwendet als Datenquelle SensorLogger aus dem AppStore. Hier müssen die nachfolgenden Einstellungen vorgenommen werden:")
 
 
-col1, col2, col3 = st.beta_columns([1,1,1])
-title_container = st.beta_container()
+col1, col2, col3 = st.columns([1,1,1])
+title_container = st.container()
 
 with title_container:
     with col1:
-        st.image("pictures/1.PNG", caption='SensorLogger App',width=250,output_format="auto")
+        st.image(image_path("1.PNG"), caption='SensorLogger App', width=250)
     with col2:
-        st.image("pictures/2.PNG", caption='Relevant Sensors',width=250,output_format="auto")       
+        st.image(image_path("2.PNG"), caption='Relevant Sensors', width=250)
     with col3:
-        st.image("pictures/3.PNG", caption='Settings in SensorLogger',width=250,output_format="auto")   
+        st.image(image_path("3.PNG"), caption='Settings in SensorLogger', width=250)
 
-st.image("pictures/4.PNG", caption='SensorLogger App: Haken setzen',width=250,output_format="auto")
+st.image(image_path("4.PNG"), caption='SensorLogger App: Haken setzen', width=250)
 
 st.write("Es werden Sensordaten des Smartphones aufgezeichnet und diese in einer .JSON Datei abgespeichert. Die App kann so eingestellt werden, dass sie nur die relevanten Sensoren aufzeichnet:")
 st.write("Accelerometer, Gyroscope, Orientation, Gravity")
